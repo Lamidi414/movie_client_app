@@ -1,70 +1,168 @@
-# Getting Started with Create React App
+# 🎬 Movie Recommendation App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack Movie Recommendation platform where users can discover, search, and save their favorite movies — powered by the TMDB API.
 
-## Available Scripts
+> ✅ Built with **React**, **Express.js**, **MongoDB**, **JWT Authentication**, and deployed via **Netlify** and **Render**.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📌 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🔐 Authentication
+- User registration & login with secure JWT tokens
+- Passwords hashed using bcrypt
+- Auth-protected routes (e.g., favorites, reviews)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🔍 Movie Discovery
+- Search movies by title (via TMDB)
+- View detailed movie information: poster, release date, genres, ratings, etc.
+- Personalized movie recommendations using TMDB’s `/recommendations` endpoint
 
-### `npm test`
+### ⭐ User Features
+- Save favorite movies to a personal watchlist
+- Create and view movie reviews with ratings
+- Responsive layout for both desktop and mobile
+- Automatic login session persistence using token storage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Frontend      | Backend       | Database  | External API |
+|---------------|---------------|-----------|--------------|
+| React         | Express.js     | MongoDB   | TMDB API     |
+| Axios         | Node.js        | Mongoose  |              |
+| React Router  | JWT Auth       |           |              |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🌐 Live Demo
 
-### `npm run eject`
+- 🔗 Frontend: [Deploy with Netlify](link_is_loading...)
+- 🔗 Backend API: [Deployed on render](https://movie-api-server.onrender.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ⚙️ Installation (Local Setup)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Clone Repositories
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/Lamidi414/movie_client_app.git
+git clone https://github.com/Lamidi414/movie_server_app.git
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 2. Backend Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+cd movie_server_app
+npm install
+```
 
-### Code Splitting
+#### 👉 Create a `.env` file with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+TMDB_API_KEY=your_tmdb_api_key
+```
 
-### Analyzing the Bundle Size
+Then:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+> The backend will run on: `http://localhost:5000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### 3. Frontend Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+cd movie_client
+npm install
+```
 
-### Deployment
+#### 👉 Create a `.env` file:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```env
+REACT_APP_TMDB_API_KEY=your_tmdb_api_key
+```
 
-### `npm run build` fails to minify
+Then:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm start
+```
+
+> The frontend will run on: `http://localhost:3000`
+
+---
+
+## 📁 Project Structure
+
+### 🔹 Frontend (React)
+```
+src/
+├── components/
+│   ├── Navbar.js
+│   ├── MovieCard.js
+│   └── ...
+├── pages/
+│   ├── Login.js
+│   ├── Register.js
+│   ├── Search.js
+│   ├── Favorites.js
+│   └── MovieDetail.js
+├── App.js
+└── index.js
+```
+
+### 🔹 Backend (Express)
+```
+server.js
+routes/
+├── auth.js
+├── movies.js
+└── reviews.js
+models/
+├── User.js
+├── Review.js
+└── Favorite.js
+middleware/
+├── authMiddleware.js
+```
+
+---
+
+## ✅ Upcoming Improvements (Optional)
+
+- [ ] Edit & delete reviews
+- [ ] User profile page with saved movies
+- [ ] Star rating UI
+- [ ] Dark mode toggle
+- [ ] Mobile-first redesign
+- [ ] Pagination & infinite scroll
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License.  
+Feel free to fork and use it in your own portfolio!
+
+---
+
+## 🙋 Author
+
+Built with ❤️ by **Abdulhamid*  
+[GitHub Project](https://github.com/Lamidi414)
