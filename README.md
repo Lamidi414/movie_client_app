@@ -164,5 +164,5 @@ Feel free to fork and use it in your own portfolio!
 
 ## 🙋 Author
 
-Built with ❤️ by **Abdulhamid*  
+Built with ❤️ by *Abdulhamid*  
 [GitHub Project](https://github.com/Lamidi414)
