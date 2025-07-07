@@ -15,6 +15,7 @@ export default function Home() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [page, setPage] = useState(1);
 
   useEffect(() => {
