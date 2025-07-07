@@ -38,6 +38,19 @@ export default function Login() {
       </Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       <Box component="form" onSubmit={handleSubmit}>
+
+        <TextField
+          sx={{ 
+            '& .MuiInputBase-root': {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'text.primary',
+            },
+            mb: 2
+          }}
+          // ... other props
+        />
         <TextField
           label="Email"
           type="email"
@@ -46,6 +59,20 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+        />
+
+  
+        <TextField
+          sx={{ 
+            '& .MuiInputBase-root': {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'text.primary',
+            },
+            mb: 2
+          }}
+          // ... other props
         />
         <TextField
           label="Password"

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,8 +9,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const navigate = useNavigate();
 
-  // Set auth token
-  const setAuthToken = (token) => {
+  const setAuthToken = useCallback((token) => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       localStorage.setItem('token', token);
@@ -18,10 +17,16 @@ export function AuthProvider({ children }) {
       delete axios.defaults.headers.common['Authorization'];
       localStorage.removeItem('token');
     }
-  };
+  }, []);
 
-  // Load user
-  const loadUser = async () => {
+  const logout = useCallback(() => {
+    setToken(null);
+    setUser(null);
+    setAuthToken(null);
+    navigate('/login');
+  }, [navigate, setAuthToken]);
+
+  const loadUser = useCallback(async () => {
     try {
       setAuthToken(token);
       const res = await axios.get('/api/auth/me');
@@ -29,45 +34,43 @@ export function AuthProvider({ children }) {
     } catch (err) {
       logout();
     }
-  };
-
-  // Register user
-  const register = async (formData) => {
-    try {
-      const res = await axios.post('/api/auth/register', formData);
-      setToken(res.data.token);
-      await loadUser();
-      navigate('/');
-    } catch (err) {
-      throw err.response.data;
-    }
-  };
-
-  // Login user
-  const login = async (formData) => {
-    try {
-      const res = await axios.post('/api/auth/login', formData);
-      setToken(res.data.token);
-      await loadUser();
-      navigate('/');
-    } catch (err) {
-      throw err.response.data;
-    }
-  };
-
-  // Logout
-  const logout = () => {
-    setToken(null);
-    setUser(null);
-    navigate('/login');
-  };
+  }, [token, logout, setAuthToken]);
 
   useEffect(() => {
     if (token) loadUser();
-  }, [token]);
+  }, [token, loadUser]);
+
+  const login = useCallback(async (credentials) => {
+    try {
+      const res = await axios.post('/api/auth/login', credentials);
+      setToken(res.data.token);
+      await loadUser();
+      navigate('/');
+    } catch (error) {
+      throw error.response.data;
+    }
+  }, [loadUser, navigate]);
+
+   // Add to your context
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem('favorites')) || []
+  );
+
+  const addFavorite = (movie) => {
+    const newFavorites = [...favorites, movie];
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    setFavorites(newFavorites);
+  };
+
+  const removeFavorite = (movieId) => {
+    const newFavorites = favorites.filter(m => m.id !== movieId);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    setFavorites(newFavorites);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, token, register, login, logout, loadUser }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loadUser, favorites, 
+    addFavorite, removeFavorite}}>
       {children}
     </AuthContext.Provider>
   );

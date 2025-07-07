@@ -43,6 +43,19 @@ export default function Register() {
       </Typography>
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
       <Box component="form" onSubmit={handleSubmit}>
+
+        <TextField
+          sx={{ 
+            '& .MuiInputBase-root': {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'text.primary',
+            },
+            mb: 2
+          }}
+          // ... other props
+        />
         <TextField
           label="Name"
           fullWidth
@@ -50,6 +63,20 @@ export default function Register() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+        />
+
+
+        <TextField
+          sx={{ 
+            '& .MuiInputBase-root': {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'text.primary',
+            },
+            mb: 2
+          }}
+          // ... other props
         />
         <TextField
           label="Email"
@@ -59,6 +86,19 @@ export default function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+        />
+
+        <TextField
+          sx={{ 
+            '& .MuiInputBase-root': {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            },
+            '& .MuiInputLabel-root': {
+              color: 'text.primary',
+            },
+            mb: 2
+          }}
+          // ... other props
         />
         <TextField
           label="Password"
